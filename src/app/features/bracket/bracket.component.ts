@@ -45,6 +45,12 @@ import { TmDataService } from '../../core/services/tm-data.service';
           <p>{{ data.t()['bracket_sub'] }}</p>
         </div>
       </div>
+      <div class="data-notice">
+        <span class="dn-dot"></span>
+        {{ data.lang() === 'es'
+          ? 'Datos de demostración · Los datos reales se habilitarán el 11 de junio de 2026, al inicio del torneo'
+          : 'Demo data · Real data will be available on June 11, 2026, when the tournament begins' }}
+      </div>
       <div class="bk-scroll">
         <div class="bk-inner" #inner>
           <svg class="bk-svg" [attr.width]="dims().w || 1" [attr.height]="dims().h || 1"

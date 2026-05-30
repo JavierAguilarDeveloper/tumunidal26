@@ -49,6 +49,13 @@ interface ScorerView {
         </div>
       </div>
 
+      <div class="data-notice">
+        <span class="dn-dot"></span>
+        {{ data.lang() === 'es'
+          ? 'Datos de demostración · Los datos reales se habilitarán el 11 de junio de 2026, al inicio del torneo'
+          : 'Demo data · Real data will be available on June 11, 2026, when the tournament begins' }}
+      </div>
+
       @if (loading()) {
         <div class="sc-list">
           @for (i of skelItems; track $index) {

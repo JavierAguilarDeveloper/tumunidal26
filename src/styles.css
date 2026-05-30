@@ -90,3 +90,15 @@ body { margin: 0; background: #0a0a0f; color: var(--txt); font-family: var(--ff-
 .sec-head .sh-eye { font: 700 12px/1 var(--ff-mono); letter-spacing: .26em; color: var(--green); text-transform: uppercase; }
 .sec-head h2 { margin: 0; font: 800 clamp(30px,4.5vw,46px)/1 var(--ff-sans); letter-spacing: -.025em; color: var(--txt); }
 .sec-head p { margin: 0; font: 500 14px/1.5 var(--ff-mono); color: var(--mut); letter-spacing: .01em; }
+
+.data-notice {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 16px; border-radius: 12px; margin-bottom: 28px;
+  background: rgba(255,215,0,.05); border: 1px solid rgba(255,215,0,.18);
+  font: 500 13px/1.5 var(--ff-mono); color: var(--txt-2); letter-spacing: .02em;
+}
+.data-notice .dn-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--gold);
+  flex: 0 0 auto; opacity: .75;
+}
+.data-notice b { color: var(--gold); }
