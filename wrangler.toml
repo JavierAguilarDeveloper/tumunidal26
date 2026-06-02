@@ -1,0 +1,7 @@
+name = "tumunidal26"
+compatibility_date = "2026-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./dist/tumunidal26/browser"
+not_found_handling = "single-page-application"
