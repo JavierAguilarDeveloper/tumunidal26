@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -10,7 +10,9 @@ export class ApiFootballService {
   private http = inject(HttpClient);
   private cache = inject(CacheService);
 
-  private headers = { 'x-apisports-key': environment.apiFootballKey };
+  private headers: HttpHeaders = environment.apiFootballKey
+    ? new HttpHeaders({ 'x-apisports-key': environment.apiFootballKey })
+    : new HttpHeaders();
 
   private get<T>(path: string, params: Record<string, string> = {}): Observable<T> {
     return this.http.get<T>(`${environment.apiBaseUrl}/${path}`, {

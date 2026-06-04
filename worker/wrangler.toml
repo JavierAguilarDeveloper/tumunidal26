@@ -1,0 +1,7 @@
+name = "tumundial26-api"
+main = "api-proxy.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+LEAGUE_ID = "1"
+SEASON = "2026"
