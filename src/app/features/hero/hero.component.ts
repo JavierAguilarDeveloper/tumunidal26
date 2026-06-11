@@ -133,10 +133,6 @@ interface HeroView {
             @if (view().venue) { · }
             87.500 {{ t()['attend'] }}
           </div>
-          <div class="hero-cta">
-            <button class="tm-btn tm-btn-primary">▶ {{ t()['watch'] }}</button>
-            <button class="tm-btn tm-btn-ghost">{{ t()['center'] }}</button>
-          </div>
         }
       </div>
       <div class="hero-scroll"><span>Scroll</span><span style="font-size:13px">↓</span></div>
