@@ -9,6 +9,7 @@ import { GruposComponent } from '../grupos/grupos.component';
 import { GoleadoresComponent } from '../goleadores/goleadores.component';
 import { InfoMundialComponent } from '../info-mundial/info-mundial.component';
 import { BracketComponent } from '../bracket/bracket.component';
+import { FansPreviewComponent } from '../fans-preview/fans-preview.component';
 
 @Component({
   selector: 'app-main',
@@ -18,6 +19,7 @@ import { BracketComponent } from '../bracket/bracket.component';
     BackdropComponent, NavbarComponent, FooterComponent,
     HeroComponent, PartidosComponent, GruposComponent,
     GoleadoresComponent, InfoMundialComponent, BracketComponent,
+    FansPreviewComponent,
   ],
   template: `
     <app-backdrop />
@@ -29,6 +31,7 @@ import { BracketComponent } from '../bracket/bracket.component';
       <app-goleadores />
       <app-info-mundial />
       <app-bracket />
+      <app-fans-preview />
     </main>
     <app-footer />
   `,

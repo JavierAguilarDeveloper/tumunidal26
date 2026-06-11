@@ -17,5 +17,9 @@ export const routes: Routes = [
     path: 'contacto',
     loadComponent: () => import('./pages/contacto/contacto.component').then(m => m.ContactoComponent),
   },
+  {
+    path: 'fans',
+    loadComponent: () => import('./pages/fans/fans.component').then(m => m.FansComponent),
+  },
   { path: '**', redirectTo: '' },
 ];

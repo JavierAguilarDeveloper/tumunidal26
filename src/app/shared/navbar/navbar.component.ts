@@ -34,7 +34,7 @@ import { TmDataService } from '../../core/services/tm-data.service';
       </div>
       <div class="nv-links">
         @for (link of links; track link[0]) {
-          <a (click)="go(link[0])">{{ data.t()[link[1]] }}</a>
+          <a (click)="go(link)">{{ data.t()[link[1]] }}</a>
         }
       </div>
       <div class="nv-right">
@@ -50,20 +50,28 @@ export class NavbarComponent {
   data = inject(TmDataService);
   private router = inject(Router);
   scrolled = signal(false);
-  links: [string, string][] = [
+  links: [string, string, string?][] = [
     ['partidos', 'nav_matches'],
     ['grupos', 'nav_groups'],
     ['bracket', 'nav_bracket'],
     ['goleadores', 'nav_scorers'],
+    ['fans', 'nav_fans', '/fans'],
   ];
 
   @HostListener('window:scroll')
   onScroll() { this.scrolled.set(window.scrollY > 30); }
 
-  go(id: string) {
+  go(link: [string, string, string?]) {
+    const [id, , route] = link;
     if (this.router.url === '/') {
       const el = document.getElementById(id);
-      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 74, behavior: 'smooth' });
+      if (el) {
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 74, behavior: 'smooth' });
+      } else if (route) {
+        this.router.navigate([route]);
+      }
+    } else if (route) {
+      this.router.navigate([route]);
     } else {
       this.router.navigate(['/'], { fragment: id });
     }

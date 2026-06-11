@@ -76,6 +76,16 @@ export class TmDataService {
     L:[['TUR',1,1,0,3,1],['ALG',1,1,0,2,1],['PAR',1,0,1,2,2],['CPV',0,0,2,1,4]],
   };
 
+  readonly FANS_GRUPOS = [
+    { nombre: 'Esto es el Mundial Loco', plataforma: 'WhatsApp', icon: '💬', miembros: 0, activo: true },
+    { nombre: 'Próximamente...', plataforma: 'WhatsApp', icon: '💬', miembros: 0, activo: false },
+  ];
+
+  readonly FANS_TOP = [
+    { pos: 1, nombre: 'Bufalo', ciudad: 'México', motivo: 'Difundió el sitio desde el inicio', badge: 'Embajador ⭐', badgeType: 'embajador', activo: true },
+    { pos: 2, nombre: 'Próximamente', ciudad: 'México', motivo: 'Sé el primero en aparecer', badge: 'Fan VIP 🔥', badgeType: 'vip', activo: false },
+  ];
+
   readonly SCORERS: Scorer[] = [
     {code:'FRA',name:'K. Mbappé',goals:5,sub:'3 PJ · 1 AST'},
     {code:'ARG',name:'L. Messi',goals:4,sub:'3 PJ · 2 AST'},
@@ -98,7 +108,7 @@ export class TmDataService {
 
   readonly I18N: Record<string, Record<string, string>> = {
     es: {
-      nav_matches:'Partidos', nav_groups:'Grupos', nav_bracket:'Bracket', nav_scorers:'Goleadores',
+      nav_matches:'Partidos', nav_groups:'Grupos', nav_bracket:'Bracket', nav_scorers:'Goleadores', nav_fans:'⭐ Fans',
       live:'En vivo', upcoming:'Próximo', ft:'Final', today:'Hoy', today_sub:'Partidos de hoy · 11 jun – 19 jul',
       groups_t:'Grupos', groups_sub:'Fase de grupos · 12 grupos · 48 selecciones',
       scorers_t:'Goleadores', scorers_sub:'Tabla de máximos anotadores',
@@ -115,7 +125,7 @@ export class TmDataService {
       inplay:'en juego', fulltime:'Finalizado',
     },
     en: {
-      nav_matches:'Matches', nav_groups:'Groups', nav_bracket:'Bracket', nav_scorers:'Scorers',
+      nav_matches:'Matches', nav_groups:'Groups', nav_bracket:'Bracket', nav_scorers:'Scorers', nav_fans:'⭐ Fans',
       live:'Live', upcoming:'Upcoming', ft:'Full time', today:'Today', today_sub:"Today's matches · Jun 11 – Jul 19",
       groups_t:'Groups', groups_sub:'Group stage · 12 groups · 48 nations',
       scorers_t:'Top Scorers', scorers_sub:'Golden Boot standings',
