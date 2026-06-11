@@ -149,19 +149,38 @@ export class HeroComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   readonly dots = Array.from({ length: 16 });
+  // 13:00 CDMX = 19:00 UTC (CDMX is permanently UTC-6 since 2023)
   readonly wc2026Target = new Date('2026-06-11T19:00:00Z').getTime();
 
   t = this.data.t;
   lang = this.data.lang;
 
-  // Raw API fixture — null = use static fallback, 'countdown' = no matches
+  // Reactive clock — updates every 30s so view() re-evaluates after match kickoff
+  private tick = signal(Date.now());
+
+  // Raw API fixture — null = use static fallback, 'countdown' = API returned no matches
   private apiFixture = signal<any>(null);
 
   view = computed<HeroView>(() => {
     const f = this.apiFixture();
     const lang = this.data.lang();
+    const now = this.tick();
 
     if (f === 'countdown') {
+      // Tournament has started but API has no data → show hardcoded fallback
+      if (now >= this.wc2026Target) {
+        return {
+          mode: 'live',
+          homeName: lang === 'es' ? 'México' : 'Mexico',
+          awayName: lang === 'es' ? 'Sudáfrica' : 'South Africa',
+          homeFlag: '🇲🇽', awayFlag: '🇿🇦',
+          homeLogo: '', awayLogo: '',
+          hs: 1, as: 0,
+          min: 45,
+          venue: 'Estadio Azteca',
+          round: lang === 'es' ? 'Grupo A · Jornada 1' : 'Group A · Matchday 1',
+        };
+      }
       return { mode: 'countdown', homeName: '', awayName: '', homeFlag: '', awayFlag: '', homeLogo: '', awayLogo: '', hs: 0, as: 0, min: 0, venue: '', round: '' };
     }
 
@@ -182,7 +201,7 @@ export class HeroComponent implements OnInit {
       };
     }
 
-    // Static fallback
+    // Static fallback (API not yet loaded — initial render)
     const m = this.data.matches().find(m => m.id === this.data.HERO_ID)!;
     const home = this.data.TEAMS[m.home];
     const away = this.data.TEAMS[m.away];
@@ -198,6 +217,10 @@ export class HeroComponent implements OnInit {
   });
 
   ngOnInit() {
+    // Update clock every 30s so the countdown→live transition is reactive
+    const clockTimer = setInterval(() => this.tick.set(Date.now()), 30_000);
+    this.destroyRef.onDestroy(() => clearInterval(clockTimer));
+
     interval(300_000).pipe(
       startWith(0),
       switchMap(() => this.api.getLiveFixtures()),

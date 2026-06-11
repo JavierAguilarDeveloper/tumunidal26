@@ -15,6 +15,17 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+// API-Football returns HTTP 200 even for rate limits and plan errors.
+// Parse the body to detect these cases and avoid caching them.
+function hasApiErrors(body) {
+  try {
+    const parsed = JSON.parse(body);
+    return parsed.errors && Object.keys(parsed.errors).length > 0;
+  } catch {
+    return false;
+  }
+}
+
 export default {
   async fetch(request, env, ctx) {
     if (request.method === 'OPTIONS') {
@@ -61,7 +72,10 @@ export default {
       'X-Cache': 'MISS',
     };
 
-    if (ttl > 0) {
+    // Only cache successful responses with actual data — never cache API error bodies
+    // (rate limit, plan restriction, etc. all return HTTP 200 with errors in the JSON)
+    const shouldCache = ttl > 0 && !hasApiErrors(body);
+    if (shouldCache) {
       responseHeaders['Cache-Control'] = `public, max-age=${ttl}`;
     }
 
@@ -70,7 +84,7 @@ export default {
       headers: responseHeaders,
     });
 
-    if (ttl > 0) {
+    if (shouldCache) {
       ctx.waitUntil(cache.put(apiUrl, response.clone()));
     }
 

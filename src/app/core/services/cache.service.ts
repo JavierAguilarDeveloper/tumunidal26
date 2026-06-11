@@ -19,6 +19,9 @@ export class CacheService {
   }
 
   set(key: string, data: unknown): void {
+    const d = data as any;
+    // Don't cache API error responses (rate limit, plan restriction, etc.)
+    if (d?.errors && Object.keys(d.errors).length > 0) return;
     this.store.set(key, { data, timestamp: Date.now() });
   }
 }
