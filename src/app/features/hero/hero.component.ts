@@ -171,7 +171,7 @@ export class HeroComponent implements OnInit {
           awayName: lang === 'es' ? 'Sudáfrica' : 'South Africa',
           homeFlag: '🇲🇽', awayFlag: '🇿🇦',
           homeLogo: '', awayLogo: '',
-          hs: 1, as: 0,
+          hs: 2, as: 0,
           min: 45,
           venue: 'Estadio Azteca',
           round: lang === 'es' ? 'Grupo A · Jornada 1' : 'Group A · Matchday 1',
